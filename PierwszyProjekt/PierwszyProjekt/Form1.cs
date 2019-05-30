@@ -17,6 +17,7 @@ namespace PierwszyProjekt
             InitializeComponent();
             numericUpDown1.Maximum = uint.MaxValue;
             numericUpDown1.Increment = uint.MaxValue / 100;
+            numericUpDown1.Minimum = uint.MaxValue / 100;
         }
 
         private void button2_ClickAsync(object sender, EventArgs e)
@@ -63,7 +64,32 @@ namespace PierwszyProjekt
             label1.Text = ""+res;
         }
 
-      
+        private void button5_Click(object sender, EventArgs e)
+        {
+            button5.Enabled = false;
+            Pi.ComputeAsync((uint)numericUpDown1.Value);
+            Pi.Calculated += Pi_Calculated;
+            
+        }
+
+        private void Pi_Calculated(double obj)
+        {
+            label1.Text=""+obj;
+            button5.Enabled = true;
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            button6.Enabled = false;
+            Pi.ComputeAsyncMultasks((int)numericUpDown2.Value, (uint)numericUpDown1.Value);
+            Pi.Calculated += Pi_Calculated1;
+
+        }
+        private void Pi_Calculated1(double obj)
+        {
+            label1.Text = "" + obj;
+            button6.Enabled = true;
+        }
 
     }
 }
